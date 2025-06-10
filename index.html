@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arquitectura Sistema EUROPHA</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+
+        .title {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 16px;
+            margin-bottom: 40px;
+        }
+
+        .architecture {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .layer {
+            width: 100%;
+            max-width: 900px;
+            position: relative;
+        }
+
+        .layer-title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #34495e;
+            background: #ecf0f1;
+            padding: 8px 20px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .components {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .component {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 600;
+            min-width: 200px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .component:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .component.core {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            font-size: 18px;
+            min-width: 250px;
+            padding: 25px;
+        }
+
+        .component.desktop {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        }
+
+        .component.web {
+            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+        }
+
+        .component.gis {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+        }
+
+        .component.tools {
+            background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+            min-width: 180px;
+        }
+
+        /* Conectores */
+        .connector {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 40px;
+            position: relative;
+        }
+
+        .arrow-line {
+            width: 3px;
+            height: 30px;
+            background: #34495e;
+            position: relative;
+        }
+
+        .arrow-line::before {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: -4px;
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 10px solid #34495e;
+        }
+
+        .bidirectional::after {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: -4px;
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-bottom: 10px solid #34495e;
+        }
+
+        .flow-label {
+            position: absolute;
+            background: #34495e;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            left: 20px;
+        }
+
+        .legend {
+            margin-top: 40px;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+
+        .legend h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .components {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .component {
+                min-width: 250px;
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Arquitectura del Sistema EUROPHA</h1>
+        <p class="subtitle">Sistema Integrado de Gestión Georreferenciada</p>
+        
+        <div class="architecture">
+            <!-- Capa de Análisis y Herramientas Especializadas -->
+            <div class="layer">
+                <div class="layer-title">🔧 Herramientas Especializadas</div>
+                <div class="components">
+                    <div class="component tools">
+                        <div>Plugin Sincronización</div>
+                        <small>Integración CAD</small>
+                    </div>
+                    <div class="component tools">
+                        <div>App Móvil Campo</div>
+                        <small>Captura en terreno</small>
+                    </div>
+                    <div class="component tools">
+                        <div>Reportería Avanzada</div>
+                        <small>Análisis y reportes</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="connector">
+                <div class="arrow-line bidirectional">
+                    <div class="flow-label">Datos</div>
+                </div>
+            </div>
+
+            <!-- Capa de Aplicaciones -->
+            <div class="layer">
+                <div class="layer-title">💻 Capa de Aplicaciones</div>
+                <div class="components">
+                    <div class="component desktop">
+                        <div>AutoCAD Map Enhanced</div>
+                        <small>Diseño y cartografía</small>
+                    </div>
+                    <div class="component web">
+                        <div>Sistema Web Moderno</div>
+                        <small>Interfaz web principal</small>
+                    </div>
+                    <div class="component gis">
+                        <div>Análisis GIS</div>
+                        <small>Procesamiento espacial</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="connector">
+                <div class="arrow-line bidirectional">
+                    <div class="flow-label">API/Servicios</div>
+                </div>
+            </div>
+
+            <!-- Capa Central -->
+            <div class="layer">
+                <div class="layer-title">🏛️ Núcleo del Sistema</div>
+                <div class="components">
+                    <div class="component core">
+                        <div>EUROPHA Mejorado</div>
+                        <small>Motor principal del sistema</small>
+                    </div>
+                    <div class="component core">
+                        <div>Base de Datos Georreferenciada</div>
+                        <small>Repositorio central de datos</small>
+                    </div>
+                    <div class="component core">
+                        <div>ArcGIS</div>
+                        <small>Plataforma GIS empresarial</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="legend">
+            <h3>📋 Leyenda de Componentes</h3>
+            <div class="legend-item">
+                <div class="legend-color" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);"></div>
+                <span><strong>Núcleo:</strong> Componentes centrales y bases de datos</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);"></div>
+                <span><strong>Desktop:</strong> Aplicaciones de escritorio especializadas</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: linear-gradient(135deg, #27ae60 0%, #229954 100%);"></div>
+                <span><strong>Web:</strong> Sistemas web y servicios online</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);"></div>
+                <span><strong>GIS:</strong> Herramientas de análisis geoespacial</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);"></div>
+                <span><strong>Herramientas:</strong> Plugins, apps móviles y reportería</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
